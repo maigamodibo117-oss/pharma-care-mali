@@ -14,7 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      medicaments: {
+        Row: {
+          categorie: string
+          created_at: string
+          date_peremption: string | null
+          description: string | null
+          id: string
+          nom: string
+          prix_fcfa: number
+          seuil_alerte: number
+          stock: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          categorie?: string
+          created_at?: string
+          date_peremption?: string | null
+          description?: string | null
+          id?: string
+          nom: string
+          prix_fcfa?: number
+          seuil_alerte?: number
+          stock?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          categorie?: string
+          created_at?: string
+          date_peremption?: string | null
+          description?: string | null
+          id?: string
+          nom?: string
+          prix_fcfa?: number
+          seuil_alerte?: number
+          stock?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ordonnances: {
+        Row: {
+          created_at: string
+          date_ordonnance: string
+          id: string
+          medecin: string | null
+          medicaments_prescrits: string
+          notes: string | null
+          patient_id: string | null
+          patient_nom: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date_ordonnance?: string
+          id?: string
+          medecin?: string | null
+          medicaments_prescrits: string
+          notes?: string | null
+          patient_id?: string | null
+          patient_nom: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date_ordonnance?: string
+          id?: string
+          medecin?: string | null
+          medicaments_prescrits?: string
+          notes?: string | null
+          patient_id?: string | null
+          patient_nom?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ordonnances_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patients: {
+        Row: {
+          age: number | null
+          created_at: string
+          id: string
+          nom: string
+          notes: string | null
+          prenom: string
+          sexe: string | null
+          telephone: string | null
+          user_id: string
+        }
+        Insert: {
+          age?: number | null
+          created_at?: string
+          id?: string
+          nom: string
+          notes?: string | null
+          prenom: string
+          sexe?: string | null
+          telephone?: string | null
+          user_id: string
+        }
+        Update: {
+          age?: number | null
+          created_at?: string
+          id?: string
+          nom?: string
+          notes?: string | null
+          prenom?: string
+          sexe?: string | null
+          telephone?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          nom: string
+          prenom: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          nom?: string
+          prenom?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          nom?: string
+          prenom?: string
+        }
+        Relationships: []
+      }
+      ventes: {
+        Row: {
+          created_at: string
+          id: string
+          medicament_id: string | null
+          medicament_nom: string
+          patient_id: string | null
+          patient_nom: string | null
+          prix_unitaire: number
+          quantite: number
+          total_fcfa: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          medicament_id?: string | null
+          medicament_nom: string
+          patient_id?: string | null
+          patient_nom?: string | null
+          prix_unitaire?: number
+          quantite?: number
+          total_fcfa?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          medicament_id?: string | null
+          medicament_nom?: string
+          patient_id?: string | null
+          patient_nom?: string | null
+          prix_unitaire?: number
+          quantite?: number
+          total_fcfa?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ventes_medicament_id_fkey"
+            columns: ["medicament_id"]
+            isOneToOne: false
+            referencedRelation: "medicaments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ventes_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
