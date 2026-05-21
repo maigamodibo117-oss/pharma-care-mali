@@ -15,6 +15,14 @@ const navItems = [
   { to: "/parametres", label: "Paramètres", icon: Settings },
 ] as const;
 
+const bottomNav = [
+  { to: "/dashboard", label: "Accueil", icon: LayoutDashboard },
+  { to: "/medicaments", label: "Médicaments", icon: Pill },
+  { to: "/patients", label: "Patients", icon: Users },
+  { to: "/assistant", label: "Assistant", icon: Bot },
+  { to: "/parametres", label: "Réglages", icon: Settings },
+] as const;
+
 export function AppLayout() {
   const { user, signOut } = useAuth();
   const nav = useNavigate();
