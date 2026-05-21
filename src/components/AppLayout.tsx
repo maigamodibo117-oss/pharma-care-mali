@@ -96,11 +96,32 @@ export function AppLayout() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 min-w-0 pt-14 lg:pt-0">
-        <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <main className="flex-1 min-w-0 pt-14 lg:pt-0 pb-20 lg:pb-0">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto animate-fade-in">
           <Outlet />
         </div>
       </main>
+
+      {/* Bottom navigation (mobile) */}
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 h-16 bg-card/95 backdrop-blur border-t border-border flex items-center justify-around px-2 shadow-lg">
+        {bottomNav.map((it) => {
+          const active = loc.pathname.startsWith(it.to);
+          const Icon = it.icon;
+          return (
+            <Link
+              key={it.to}
+              to={it.to}
+              className={`flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-[10px] font-medium transition-all
+                ${active ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <div className={`p-1.5 rounded-xl transition-all ${active ? "bg-primary/10 scale-110" : ""}`}>
+                <Icon className="h-5 w-5" />
+              </div>
+              <span className="truncate max-w-full">{it.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
     </div>
   );
 }
