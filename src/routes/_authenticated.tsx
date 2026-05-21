@@ -1,11 +1,12 @@
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
+import { AppLayout } from "@/components/AppLayout";
 
-export const Route = createFileRoute("/")({
-  component: Index,
+export const Route = createFileRoute("/_authenticated")({
+  component: Guard,
 });
 
-function Index() {
+function Guard() {
   const { user, loading } = useAuth();
   if (loading) {
     return (
@@ -14,5 +15,6 @@ function Index() {
       </div>
     );
   }
-  return <Navigate to={user ? "/dashboard" : "/login"} />;
+  if (!user) return <Navigate to="/login" />;
+  return <AppLayout />;
 }
