@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      fiches_medicaments: {
+        Row: {
+          classe_therapeutique: string | null
+          conservation: string | null
+          contre_indications: string | null
+          created_at: string
+          date_maj: string
+          dci: string
+          dosage: string | null
+          effets_indesirables: string | null
+          forme: string | null
+          id: string
+          image_source: string | null
+          image_url: string | null
+          indications: string | null
+          interactions: string | null
+          laboratoire: string | null
+          nom_commercial: string
+          posologie: string | null
+          precautions: string | null
+          sources: string
+          updated_at: string
+        }
+        Insert: {
+          classe_therapeutique?: string | null
+          conservation?: string | null
+          contre_indications?: string | null
+          created_at?: string
+          date_maj?: string
+          dci: string
+          dosage?: string | null
+          effets_indesirables?: string | null
+          forme?: string | null
+          id?: string
+          image_source?: string | null
+          image_url?: string | null
+          indications?: string | null
+          interactions?: string | null
+          laboratoire?: string | null
+          nom_commercial: string
+          posologie?: string | null
+          precautions?: string | null
+          sources?: string
+          updated_at?: string
+        }
+        Update: {
+          classe_therapeutique?: string | null
+          conservation?: string | null
+          contre_indications?: string | null
+          created_at?: string
+          date_maj?: string
+          dci?: string
+          dosage?: string | null
+          effets_indesirables?: string | null
+          forme?: string | null
+          id?: string
+          image_source?: string | null
+          image_url?: string | null
+          indications?: string | null
+          interactions?: string | null
+          laboratoire?: string | null
+          nom_commercial?: string
+          posologie?: string | null
+          precautions?: string | null
+          sources?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       medicaments: {
         Row: {
           categorie: string
