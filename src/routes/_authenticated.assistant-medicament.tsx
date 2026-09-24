@@ -7,7 +7,8 @@ import { expliquerFiche } from "@/lib/fiche-ia.functions";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AlertTriangle, ImageOff, Loader2, Search, Sparkles, BookOpen } from "lucide-react";
+import { FicheImage } from "@/components/FicheImage";
+import { AlertTriangle, Loader2, Search, Sparkles, BookOpen } from "lucide-react";
 
 type Fiche = Database["public"]["Tables"]["fiches_medicaments"]["Row"];
 type Mode = "explain" | "summary" | "effects" | "compare";
@@ -61,9 +62,10 @@ function Page() {
           {results.length === 0 && <p className="p-3 text-sm text-muted-foreground">Fiche non disponible.</p>}
           {results.map((f) => (
             <button key={f.id} onClick={() => setSel(f)}
-              className={`w-full text-left p-3 rounded-lg text-sm transition-colors ${sel?.id === f.id ? "bg-primary/10 text-primary" : "hover:bg-accent"}`}>
-              <div className="font-medium">{f.nom_commercial}</div>
-              <div className="text-xs text-muted-foreground">{f.dci}{f.dosage ? ` · ${f.dosage}` : ""}</div>
+              className={`w-full text-left p-3 rounded-lg text-sm transition-colors flex gap-3 items-center ${sel?.id === f.id ? "bg-primary/10 text-primary" : "hover:bg-accent"}`}>
+              <FicheImage url={f.image_url} source={f.image_source} alt={f.nom_commercial} size="sm" />
+              <div><div className="font-medium">{f.nom_commercial}</div>
+              <div className="text-xs text-muted-foreground">{f.dci}{f.dosage ? ` · ${f.dosage}` : ""}</div></div>
             </button>
           ))}
         </Card>
@@ -79,10 +81,7 @@ function FicheView({ fiche, all }: { fiche: Fiche; all: Fiche[] }) {
     <div className="space-y-4">
       <Card className="p-5">
         <div className="flex gap-4">
-          <div className="h-24 w-24 rounded-xl bg-muted flex flex-col items-center justify-center text-muted-foreground shrink-0 overflow-hidden">
-            {fiche.image_url ? <img src={fiche.image_url} alt={fiche.nom_commercial} className="h-full w-full object-cover" /> :
-              <><ImageOff className="h-6 w-6" /><span className="text-[10px] mt-1 text-center">Image non disponible</span></>}
-          </div>
+          <FicheImage url={fiche.image_url} source={fiche.image_source} alt={fiche.nom_commercial} />
           <div>
             <h2 className="text-2xl font-bold">{fiche.nom_commercial}</h2>
             <p className="text-muted-foreground">{fiche.dci} {fiche.dosage && `· ${fiche.dosage}`} {fiche.forme && `· ${fiche.forme}`}</p>
