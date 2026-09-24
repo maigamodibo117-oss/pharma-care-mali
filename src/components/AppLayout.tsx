@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import {
-  LayoutDashboard, Pill, Users, ShoppingCart, Bot, Settings, LogOut, Menu, X, Cross
+  LayoutDashboard, Pill, Users, ShoppingCart, Bot, Settings, LogOut, Menu, X, Cross, BookOpen
 } from "lucide-react";
 import { useState } from "react";
 
@@ -11,6 +11,7 @@ const navItems = [
   { to: "/medicaments", label: "Médicaments", icon: Pill },
   { to: "/patients", label: "Patients", icon: Users },
   { to: "/ventes", label: "Ventes", icon: ShoppingCart },
+  { to: "/assistant-medicament", label: "Assistant Médicament", icon: BookOpen },
   { to: "/assistant", label: "Assistant IA", icon: Bot },
   { to: "/parametres", label: "Paramètres", icon: Settings },
 ] as const;
