@@ -17,6 +17,7 @@ import { Route as AuthenticatedPatientsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedParametresRouteImport } from './routes/_authenticated.parametres'
 import { Route as AuthenticatedMedicamentsRouteImport } from './routes/_authenticated.medicaments'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
+import { Route as AuthenticatedAssistantMedicamentRouteImport } from './routes/_authenticated.assistant-medicament'
 import { Route as AuthenticatedAssistantRouteImport } from './routes/_authenticated.assistant'
 
 const LoginRoute = LoginRouteImport.update({
@@ -59,6 +60,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAssistantMedicamentRoute =
+  AuthenticatedAssistantMedicamentRouteImport.update({
+    id: '/assistant-medicament',
+    path: '/assistant-medicament',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAssistantRoute = AuthenticatedAssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/assistant': typeof AuthenticatedAssistantRoute
+  '/assistant-medicament': typeof AuthenticatedAssistantMedicamentRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/medicaments': typeof AuthenticatedMedicamentsRoute
   '/parametres': typeof AuthenticatedParametresRoute
@@ -79,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/assistant': typeof AuthenticatedAssistantRoute
+  '/assistant-medicament': typeof AuthenticatedAssistantMedicamentRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/medicaments': typeof AuthenticatedMedicamentsRoute
   '/parametres': typeof AuthenticatedParametresRoute
@@ -91,6 +100,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/assistant': typeof AuthenticatedAssistantRoute
+  '/_authenticated/assistant-medicament': typeof AuthenticatedAssistantMedicamentRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/medicaments': typeof AuthenticatedMedicamentsRoute
   '/_authenticated/parametres': typeof AuthenticatedParametresRoute
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/assistant'
+    | '/assistant-medicament'
     | '/dashboard'
     | '/medicaments'
     | '/parametres'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/assistant'
+    | '/assistant-medicament'
     | '/dashboard'
     | '/medicaments'
     | '/parametres'
@@ -124,6 +136,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/login'
     | '/_authenticated/assistant'
+    | '/_authenticated/assistant-medicament'
     | '/_authenticated/dashboard'
     | '/_authenticated/medicaments'
     | '/_authenticated/parametres'
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/assistant-medicament': {
+      id: '/_authenticated/assistant-medicament'
+      path: '/assistant-medicament'
+      fullPath: '/assistant-medicament'
+      preLoaderRoute: typeof AuthenticatedAssistantMedicamentRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/assistant': {
       id: '/_authenticated/assistant'
       path: '/assistant'
@@ -207,6 +227,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAssistantRoute: typeof AuthenticatedAssistantRoute
+  AuthenticatedAssistantMedicamentRoute: typeof AuthenticatedAssistantMedicamentRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMedicamentsRoute: typeof AuthenticatedMedicamentsRoute
   AuthenticatedParametresRoute: typeof AuthenticatedParametresRoute
@@ -216,6 +237,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAssistantRoute: AuthenticatedAssistantRoute,
+  AuthenticatedAssistantMedicamentRoute: AuthenticatedAssistantMedicamentRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedMedicamentsRoute: AuthenticatedMedicamentsRoute,
   AuthenticatedParametresRoute: AuthenticatedParametresRoute,
